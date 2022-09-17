@@ -1,0 +1,6 @@
+Journall is a journalling application in which multiple users can log in an create their own journals with chapters.
+
+app.js - control the flow of data between data and views.
+data - responsible for fetching data from the database and making it usable for app.js.
+views - responsible for rendering each piece of the application (including errors and loading).
+helpers - responsible for checking input validation among other things.

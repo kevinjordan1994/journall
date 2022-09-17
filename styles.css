@@ -14,6 +14,22 @@ body {
   --secondary-color: #549b8a;
 }
 
+.button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background: linear-gradient(var(--secondary-color), var(--primary-color));
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.button:hover,
+.button:active {
+  background: var(--primary-color);
+  cursor: pointer;
+}
+
 /* SIGN IN =====================================================*/
 .sign-in__main {
   position: relative;
@@ -90,18 +106,45 @@ body {
   gap: 0.25rem;
 }
 
-.sign-in__button {
-  width: 100%;
-  font-size: 1rem;
-  padding: 0.5rem;
-  background: linear-gradient(var(--secondary-color), var(--primary-color));
-  border: none;
-  border-radius: 0.25rem;
-  color: #fff;
+/* JOURNALS =====================================================*/
+
+.journals__main {
+  height: 100vh;
+  padding-top: 10rem;
 }
 
-.sign-in__button:hover,
-.sign-in__button:active {
-  background: var(--primary-color);
+.journals__card {
+  background-color: #fff;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 30rem;
+  margin: 0 auto;
+  height: 70%;
+  max-height: 70%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.journals__add-button {
+  padding: 2rem;
+  border-radius: 1rem 1rem 0 0;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.journals__title-div {
+  padding: 1rem;
+  color: #101010;
+  border-bottom: 2px dotted var(--primary-color);
+  width: 80%;
+  margin: 1rem auto;
+}
+
+.journals__title-div:hover {
   cursor: pointer;
+}
+
+.journals__title-div:hover h2 {
+  text-decoration: underline;
 }
