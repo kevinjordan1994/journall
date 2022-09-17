@@ -1,4 +1,5 @@
 import { findUser } from "./data/fetchData.js";
+import { activateJournals } from "./app.js";
 import renderJournals from "./renderJournals.js";
 
 export let currentUser = null;
@@ -16,8 +17,9 @@ export const checkForValidUser = async (userName, password) => {
   }
 };
 
+//Set currentUser, render their journals and attach eventlisteners to them.
 const signUserIn = (user) => {
   currentUser = user;
-  console.log(currentUser);
   renderJournals(user);
+  activateJournals();
 };

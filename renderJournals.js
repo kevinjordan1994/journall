@@ -12,7 +12,7 @@ function generateJournalsHTML(journals = []) {
     return `<div class="journals__main">
     <div class="journals__card">
     <button class="button journals__add-button">Add JournAll</button>
-            <div class="journals__title-div">
+            <div class="journals__title-div" data-id="${journal.title}">
                 <h2>${journal.title}</h2>
                 <p>${journal.entries.length}${
       journal.entries.length === 1 ? "Entry" : "Entries"
@@ -29,6 +29,5 @@ export default function renderJournals(user) {
     reRenderApp(noJournalsHTML);
     return;
   }
-  console.log(journals);
   reRenderApp(generateJournalsHTML(journals));
 }
