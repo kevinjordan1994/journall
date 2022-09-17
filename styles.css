@@ -1,0 +1,107 @@
+/* UNIVERSAL =====================================================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+:root {
+  --primary-color: #1c6758;
+  --secondary-color: #549b8a;
+}
+
+/* SIGN IN =====================================================*/
+.sign-in__main {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url(/images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg);
+  background-repeat: no-repeat;
+}
+
+.sign-in__titles {
+  width: 100%;
+  background-color: var(--primary-color);
+  padding: 1rem 2rem 2rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.sign-in__card {
+  width: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.sign-in__title {
+  text-align: center;
+  color: white;
+  font-size: 4rem;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+  letter-spacing: -2px;
+}
+
+.sign-in__sub-title {
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sign-in__form {
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+
+.sign-in__input-div {
+  border: 1px solid #999;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.sign-in__input {
+  font-size: 1rem;
+  display: flex;
+  background-color: rgb(240, 240, 240);
+  padding: 0.25rem;
+  border: none;
+}
+
+.sign-in__input:first-child {
+  border-bottom: 1px solid #999;
+}
+
+.sign-in__buttons-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sign-in__button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background: linear-gradient(var(--secondary-color), var(--primary-color));
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.sign-in__button:hover,
+.sign-in__button:active {
+  background: var(--primary-color);
+  cursor: pointer;
+}
