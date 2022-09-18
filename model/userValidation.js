@@ -19,3 +19,8 @@ const signUserIn = (user) => {
   currentUser = user;
   activateJournals();
 };
+
+export async function reloadUser(userName) {
+  currentUser = await findUser(userName);
+  console.log(currentUser);
+}

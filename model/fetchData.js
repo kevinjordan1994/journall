@@ -1,4 +1,5 @@
 import { API_KEY } from "../config.js";
+import { currentUser } from "./userValidation.js";
 
 export async function fetchData(path = "users.json", data = undefined) {
   const databaseURL = `${API_KEY}${path}`;

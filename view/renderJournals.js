@@ -1,4 +1,4 @@
-import { reRenderApp } from "../helpers.js";
+import { reRenderApp } from "../views.js";
 
 const noJournalsHTML = `<div class="journals__main">
 <div class="journals__card">
@@ -8,23 +8,24 @@ const noJournalsHTML = `<div class="journals__main">
 </div>`;
 
 function generateJournalsHTML(journals = []) {
-  return journals.map((journal) => {
-    return `<div class="journals__main">
+  return `<div class="journals__main">
     <div class="journals__card">
-    <button class="button journals__add-button">Add JournAll</button>
-            <div class="journals__title-div" data-id="${journal.title}">
-                <h2>${journal.title}</h2>
-                <p>${journal.entries.length}${
-      journal.entries.length === 1 ? "Entry" : "Entries"
-    }</p>
-            </div>
-        </div>
+      <button class="button journals__add-button">Add JournAll</button>
+      ${journals
+        .map((journal) => {
+          return `<div class="journals__title-div" data-id="${journal.title}">
+          <h2>${journal.title}</h2>
+            <p>${journal.entries?.length || `No`} ${
+            journal.entries?.length === 1 ? "Entry" : "Entries"
+          }</p>
+        </div>`;
+        })
+        .join(" ")}
+    </div>
     </div>`;
-  });
 }
 
-export default function renderJournals(user) {
-  const { journals } = user;
+export default function renderJournals(journals) {
   if (!journals) {
     reRenderApp(noJournalsHTML);
     return;

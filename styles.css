@@ -30,6 +30,54 @@ body {
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}
+
+/* MODALS ======================================================*/
+
+.modal {
+  position: relative;
+}
+
+.modal__window {
+  position: fixed;
+  z-index: 3;
+  width: 25%;
+  min-width: 15rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal__header {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1.25rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.modal__content-div {
+  background-color: #fff;
+  padding: 2rem 1rem 3rem;
+}
+
+.modal__button-div {
+  background-color: #fff;
+  padding: 0 2rem 2rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.modal__backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
 /* SIGN IN =====================================================*/
 .sign-in__main {
   position: relative;
@@ -44,7 +92,7 @@ body {
   width: 100%;
   background-color: var(--primary-color);
   padding: 1rem 2rem 2rem;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .sign-in__card {
@@ -54,7 +102,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -138,7 +186,7 @@ body {
   color: #101010;
   border-bottom: 2px dotted var(--primary-color);
   width: 80%;
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
 .journals__title-div:hover {
