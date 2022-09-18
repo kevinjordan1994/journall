@@ -1,5 +1,6 @@
-import renderNewJournalModal from "./renderNewJournalModal.js";
-import { checkForValidUser, currentUser } from "./userValidation.js";
+import renderNewJournalModal from "./view/renderNewJournalModal.js";
+import { checkForValidUser, currentUser } from "./model/userValidation.js";
+import renderJournals from "./view/renderJournals.js";
 
 //Query Selectors===========================================================
 //Sign in
@@ -7,20 +8,19 @@ const userNameInput = document.querySelector(".sign-in__user-name");
 const passwordInput = document.querySelector(".sign-in__password");
 const signInButton = document.querySelector(".sign-in__button");
 
-function main() {
-  //Event Listeners
-  signInButton.addEventListener(`click`, (event) => {
-    event.preventDefault();
-    checkForValidUser(userNameInput.value, passwordInput.value);
-  });
-}
+signInButton.addEventListener(`click`, (event) => {
+  event.preventDefault();
+  checkForValidUser(userNameInput.value, passwordInput.value);
+});
 
-export const activateJournals = () => {
-  //Add Journal button logic
+const activateJournalButton = () => {
   const newJournalButton = document.querySelector(".journals__add-button");
   newJournalButton.addEventListener("click", renderNewJournalModal);
+};
 
-  //Listener for clicking on titles
+export const activateJournals = () => {
+  renderJournals(currentUser);
+  activateJournalButton();
   const journalElements = document.querySelectorAll(".journals__title-div");
   journalElements.forEach((journal) =>
     journal.addEventListener("click", () => {
@@ -31,5 +31,3 @@ export const activateJournals = () => {
     })
   );
 };
-
-main();

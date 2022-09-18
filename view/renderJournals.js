@@ -1,4 +1,4 @@
-import { reRenderApp } from "./helpers.js";
+import { reRenderApp } from "../helpers.js";
 
 const noJournalsHTML = `<div class="journals__main">
 <div class="journals__card">

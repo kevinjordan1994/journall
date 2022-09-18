@@ -1,10 +1,8 @@
-import { findUser } from "./data/fetchData.js";
-import { activateJournals } from "./app.js";
-import renderJournals from "./renderJournals.js";
+import { findUser } from "./fetchData.js";
+import { activateJournals } from "../app.js";
 
 export let currentUser = null;
 
-//Check the database to see if the user exists, then check to see if the password is correct
 export const checkForValidUser = async (userName, password) => {
   try {
     const user = await findUser(userName);
@@ -17,9 +15,7 @@ export const checkForValidUser = async (userName, password) => {
   }
 };
 
-//Set currentUser, render their journals and attach eventlisteners to them.
 const signUserIn = (user) => {
   currentUser = user;
-  renderJournals(user);
   activateJournals();
 };

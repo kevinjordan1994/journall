@@ -1,4 +1,4 @@
-import { reRenderApp } from "./helpers.js";
+import { reRenderApp } from "../helpers.js";
 
 const newJournalHTML = `<div class="new-journal__modal">
     <form class="new-journal__form">
