@@ -159,6 +159,7 @@ body {
 .journals__main {
   height: 100vh;
   padding-top: 10rem;
+  background: linear-gradient(#fff, var(--secondary-color));
 }
 
 .journals__card {
@@ -172,6 +173,7 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 }
 
 .journals__add-button {
@@ -195,4 +197,19 @@ body {
 
 .journals__title-div:hover h2 {
   text-decoration: underline;
+}
+
+/* ENTRIES =====================================================*/
+
+.entries__add-button {
+  padding: 2rem;
+  border-radius: 1rem 1rem 0 0;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.entries__back-arrow {
+  width: 3rem;
+  position: absolute;
+  bottom: 0;
 }

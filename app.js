@@ -1,14 +1,14 @@
-import renderNewJournalModal from "./view/renderNewJournalModal.js";
+import { renderModal } from "./view/renderModal.js";
 import renderJournals from "./view/renderJournals.js";
 import { clearModal } from "./view/renderModal.js";
 import { checkForValidUser, currentUser } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
 import {
-  createJournalsArray,
   addNewJournal,
   setLocalJournals,
   localJournals,
 } from "./model/journals.js";
+import renderEntries from "./view/renderEntries.js";
 
 //Query Selectors===========================================================
 //Sign in
@@ -25,6 +25,26 @@ export const newJournalModal = modal.createModal(
     {
       text: "Add JournAll",
       class: "button__add-journal",
+    },
+  ]
+);
+
+export const newEntryModal = modal.createModal(
+  "New Entry",
+  "",
+  [
+    { type: "text", placeholder: "Title", class: "modal__entry__title-input" },
+    {
+      type: "text",
+      placeholder: "What's on your mind?",
+      class: "modal__entry__body-input",
+      textarea: true,
+    },
+  ],
+  [
+    {
+      text: "Add Entry",
+      class: "button__add-entry",
     },
   ]
 );
@@ -55,9 +75,24 @@ const activateJournalButton = () => {
   const newJournalButton = document.querySelector(".journals__add-button");
   newJournalButton.addEventListener("click", (event) => {
     event.preventDefault();
-    renderNewJournalModal(newJournalModal);
+    renderModal(newJournalModal);
     activateAddJournalModal();
   });
+};
+
+const activateEntriesButtons = () => {
+  const backToJournalsButton = document.querySelector(".entries__back-arrow");
+  const addEntryButton = document.querySelector(".entries__add-button");
+  backToJournalsButton.addEventListener(`click`, activateJournals);
+  addEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    renderModal(newEntryModal);
+  });
+};
+
+export const activateEntries = (entries) => {
+  renderEntries(entries);
+  activateEntriesButtons();
 };
 
 export const activateJournals = () => {
@@ -70,6 +105,7 @@ export const activateJournals = () => {
       const targetJournal = localJournals.find(
         (journal) => journal.title === journalID
       );
+      activateEntries(targetJournal.entries);
     })
   );
 };
