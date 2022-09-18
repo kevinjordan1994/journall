@@ -45,7 +45,8 @@ const activateAddJournalModal = () => {
   addJournalButton.addEventListener("click", (event) => {
     event.preventDefault();
     addNewJournal(journalTitleInput.value);
-    activateJournals();
+    renderJournals(localJournals);
+    activateJournalButton();
     clearModal();
   });
 };
@@ -66,7 +67,7 @@ export const activateJournals = () => {
   journalElements.forEach((journal) =>
     journal.addEventListener("click", () => {
       const journalID = journal.dataset.id;
-      const targetJournal = journals.find(
+      const targetJournal = localJournals.find(
         (journal) => journal.title === journalID
       );
     })

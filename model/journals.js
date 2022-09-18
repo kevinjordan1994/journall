@@ -9,6 +9,7 @@ export function addNewJournal(journalTitle) {
     return;
   }
   sendJournalToDatabase(currentUser.userName, journalTitle);
+  setLocalJournals([...localJournals, { title: journalTitle, entries: [] }]);
 }
 
 export const createJournalsArray = (journalsObject) => {

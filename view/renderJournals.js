@@ -25,8 +25,8 @@ function generateJournalsHTML(journals = []) {
     </div>`;
 }
 
-export default function renderJournals(journals) {
-  if (!journals) {
+export default function renderJournals(journals = []) {
+  if (journals.length < 1) {
     reRenderApp(noJournalsHTML);
     return;
   }
