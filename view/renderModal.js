@@ -8,15 +8,7 @@ const generateModalHTML = (modal = { title: "Loading" }) => {
     </div>
     <div class="modal__content-div">
       ${modal.content ? `<p class="modal__content">${modal.content}</p>` : ""}
-      ${
-        modal.inputs
-          ? modal.inputs
-              .map((input) => {
-                return `<input class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
-              })
-              .join(" ")
-          : ""
-      }
+      ${modal.inputs ? generateInputs(modal.inputs) : ""}
     </div>
     <div class="modal__button-div">
     ${
@@ -38,6 +30,19 @@ export function clearModal() {
   backdrop.classList.add("hidden");
   const modalWindow = document.querySelector(".modal__window");
   modalWindow.remove();
+}
+
+function generateInputs(inputs) {
+  let inputsHTML = "";
+  inputs.forEach((input) => {
+    if (input.textarea) {
+      inputsHTML += `<textarea class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"></textarea>`;
+    } else {
+      inputsHTML += `<input class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
+    }
+  });
+  console.log(inputsHTML);
+  return inputsHTML;
 }
 
 backdrop.addEventListener("click", clearModal);

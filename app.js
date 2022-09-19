@@ -33,7 +33,11 @@ export const newEntryModal = modal.createModal(
   "New Entry",
   "",
   [
-    { type: "text", placeholder: "Title", class: "modal__entry__title-input" },
+    {
+      type: "text",
+      placeholder: "Title",
+      class: "modal__entry__title-input",
+    },
     {
       type: "text",
       placeholder: "What's on your mind?",
