@@ -60,7 +60,7 @@ export const newEntryModal = modal.createModal(
 signInButton.addEventListener(`click`, (event) => {
   event.preventDefault();
   checkForValidUser(userNameInput.value, passwordInput.value);
-  if (currentUser) renderModal();
+  renderModal();
 });
 
 const refreshJournals = (
@@ -148,4 +148,5 @@ export const activateJournals = () => {
 
 export const handleError = (error) => {
   renderError(error, 5000);
+  clearModal();
 };
