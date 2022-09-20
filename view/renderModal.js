@@ -12,10 +12,11 @@ const generateModalHTML = (modal = { title: "Loading" }) => {
     </div>
     <div class="modal__button-div">
     ${
-      modal.buttons &&
-      modal.buttons.map((button) => {
-        return `<button class="button modal__button ${button.class}">${button.text}</button>`;
-      })
+      modal.buttons
+        ? modal.buttons.map((button) => {
+            return `<button class="button modal__button ${button.class}">${button.text}</button>`;
+          })
+        : ""
     }
     </div>
     </div>`;
@@ -27,8 +28,9 @@ export function renderModal(html) {
 }
 
 export function clearModal() {
-  backdrop.classList.add("hidden");
   const modalWindow = document.querySelector(".modal__window");
+  if (!modalWindow) return;
+  backdrop.classList.add("hidden");
   modalWindow.remove();
 }
 

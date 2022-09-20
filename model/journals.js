@@ -1,15 +1,25 @@
-import { fetchData } from "./fetchData.js";
+import { fetchData, replaceData } from "./fetchData.js";
 import { currentUser } from "./userValidation.js";
+import { generateId } from "../helpers.js";
 
 export let localJournals = [];
+export let targetJournal = null;
 
 export function addNewJournal(journalTitle) {
   if (journalTitle.trim().length < 1) {
     console.log("Please Enter A Valid Name");
     return;
   }
-  sendJournalToDatabase(currentUser.userName, journalTitle);
-  setLocalJournals([...localJournals, { title: journalTitle, entries: [] }]);
+  const journalId = generateId();
+  sendJournalToDatabase(journalTitle, journalId);
+  setLocalJournals([
+    ...localJournals,
+    {
+      title: journalTitle,
+      id: journalId,
+      author: currentUser.userName,
+    },
+  ]);
 }
 
 export const createJournalsArray = (journalsObject) => {
@@ -24,14 +34,40 @@ export function setLocalJournals(journals) {
   localJournals = createJournalsArray(journals);
 }
 
-export function reFetchJournals(userName) {
-  const newJournals = fetchData(`users/${userName}/journals.json`);
-  return createJournalsArray(newJournals);
+export function setTargetJournal(journal) {
+  targetJournal = journal;
 }
 
-const sendJournalToDatabase = (userName, journalTitle) => {
-  fetchData(`users/${userName}/journals.json`, {
+export function addNewEntry(title, content) {
+  const newEntry = {
+    title,
+    content,
+    id: generateId(),
+  };
+  sendEntryToDatabase(targetJournal, newEntry);
+}
+
+const sendJournalToDatabase = (journalTitle, id) => {
+  fetchData(`journals.json`, {
     title: journalTitle,
-    entries: [],
+    id,
+    author: currentUser.userName,
   });
+};
+
+const sendEntryToDatabase = (journal, entry) => {
+  const filteredJournals = localJournals.filter(
+    (journal) => journal.id !== targetJournal.id
+  );
+  if (!targetJournal.entries) targetJournal.entries = [];
+  targetJournal.entries.push(entry);
+  setLocalJournals([...filteredJournals, targetJournal]);
+  replaceData(`journals.json`, localJournals);
+};
+
+export const filterLocalJournals = (journalsObject) => {
+  const journalsArray = createJournalsArray(journalsObject).filter(
+    (journal) => journal.author === currentUser.userName
+  );
+  setLocalJournals(journalsArray);
 };

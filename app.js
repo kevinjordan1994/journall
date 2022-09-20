@@ -7,6 +7,9 @@ import {
   addNewJournal,
   setLocalJournals,
   localJournals,
+  setTargetJournal,
+  addNewEntry,
+  targetJournal,
 } from "./model/journals.js";
 import renderEntries from "./view/renderEntries.js";
 
@@ -55,12 +58,20 @@ export const newEntryModal = modal.createModal(
 
 signInButton.addEventListener(`click`, (event) => {
   event.preventDefault();
+  renderModal();
   checkForValidUser(userNameInput.value, passwordInput.value);
 });
 
-const refreshJournals = (newJournals = currentUser.journals) => {
+const refreshJournals = (
+  newJournals = currentUser.journals,
+  viewingJournals = true
+) => {
   setLocalJournals(newJournals);
-  renderJournals(localJournals);
+  viewingJournals
+    ? renderJournals(localJournals)
+    : renderEntries(
+        localJournals.find((journal) => journal.title === targetJournal.title)
+      );
 };
 
 const activateAddJournalModal = () => {
@@ -70,8 +81,21 @@ const activateAddJournalModal = () => {
     event.preventDefault();
     addNewJournal(journalTitleInput.value);
     renderJournals(localJournals);
+    activateJournalDivs();
     activateJournalButton();
     clearModal();
+  });
+};
+
+const activateAddEntryModal = () => {
+  const addEntryButton = document.querySelector(".button__add-entry");
+  const entryTitleInput = document.querySelector(".modal__entry__title-input");
+  const entryContentInput = document.querySelector(".modal__entry__body-input");
+  addEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    addNewEntry(entryTitleInput.value, entryContentInput.value);
+    clearModal();
+    activateEntries(targetJournal.entries);
   });
 };
 
@@ -84,6 +108,20 @@ const activateJournalButton = () => {
   });
 };
 
+const activateJournalDivs = () => {
+  const journalElements = document.querySelectorAll(".journals__title-div");
+  journalElements.forEach((journal) =>
+    journal.addEventListener("click", () => {
+      const journalID = journal.dataset.id;
+      const targetJ = localJournals.find(
+        (journal) => journal.title === journalID
+      );
+      activateEntries(targetJ.entries);
+      setTargetJournal(targetJ);
+    })
+  );
+};
+
 const activateEntriesButtons = () => {
   const backToJournalsButton = document.querySelector(".entries__back-arrow");
   const addEntryButton = document.querySelector(".entries__add-button");
@@ -91,6 +129,7 @@ const activateEntriesButtons = () => {
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
     renderModal(newEntryModal);
+    activateAddEntryModal();
   });
 };
 
@@ -100,16 +139,8 @@ export const activateEntries = (entries) => {
 };
 
 export const activateJournals = () => {
-  refreshJournals(currentUser.journals);
+  refreshJournals(localJournals);
+  clearModal();
   activateJournalButton();
-  const journalElements = document.querySelectorAll(".journals__title-div");
-  journalElements.forEach((journal) =>
-    journal.addEventListener("click", () => {
-      const journalID = journal.dataset.id;
-      const targetJournal = localJournals.find(
-        (journal) => journal.title === journalID
-      );
-      activateEntries(targetJournal.entries);
-    })
-  );
+  activateJournalDivs();
 };

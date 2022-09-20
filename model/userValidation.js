@@ -1,5 +1,6 @@
-import { findUser } from "./fetchData.js";
+import { fetchData, findUser } from "./fetchData.js";
 import { activateJournals } from "../app.js";
+import { filterLocalJournals } from "./journals.js";
 
 export let currentUser = null;
 
@@ -9,14 +10,16 @@ export const checkForValidUser = async (userName, password) => {
     if (!user) throw new Error("User does not exist.");
     const validUser = user.password === password;
     if (!validUser) throw new Error("Password is incorrect.");
-    signUserIn(user);
+    await signUserIn(user);
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-const signUserIn = (user) => {
+const signUserIn = async (user) => {
   currentUser = user;
+  const allJournals = await fetchData(`journals.json`);
+  filterLocalJournals(allJournals);
   activateJournals();
 };
 
