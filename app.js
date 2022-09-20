@@ -12,6 +12,7 @@ import {
   targetJournal,
 } from "./model/journals.js";
 import renderEntries from "./view/renderEntries.js";
+import { renderError } from "./view/renderErrors.js";
 
 //Query Selectors===========================================================
 //Sign in
@@ -58,8 +59,8 @@ export const newEntryModal = modal.createModal(
 
 signInButton.addEventListener(`click`, (event) => {
   event.preventDefault();
-  renderModal();
   checkForValidUser(userNameInput.value, passwordInput.value);
+  if (currentUser) renderModal();
 });
 
 const refreshJournals = (
@@ -143,4 +144,8 @@ export const activateJournals = () => {
   clearModal();
   activateJournalButton();
   activateJournalDivs();
+};
+
+export const handleError = (error) => {
+  renderError(error, 5000);
 };

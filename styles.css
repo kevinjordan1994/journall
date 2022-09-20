@@ -7,6 +7,7 @@
 
 body {
   font-family: "Ubuntu", sans-serif;
+  color: #222;
 }
 
 :root {
@@ -76,6 +77,49 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 2;
+}
+
+/* ERRORS ======================================================*/
+.error__card {
+  width: fit-content;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: #ffa17a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 10;
+  animation: fade_in 200ms ease-in;
+}
+
+.error__hidden {
+  opacity: 0;
+  transform: translate(-50% -50%);
+  animation: fade_out 200ms ease-in;
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fade_out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
 }
 
 /* SIGN IN =====================================================*/

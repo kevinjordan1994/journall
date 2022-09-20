@@ -1,5 +1,5 @@
 import { fetchData, findUser } from "./fetchData.js";
-import { activateJournals } from "../app.js";
+import { activateJournals, handleError } from "../app.js";
 import { filterLocalJournals } from "./journals.js";
 
 export let currentUser = null;
@@ -12,7 +12,7 @@ export const checkForValidUser = async (userName, password) => {
     if (!validUser) throw new Error("Password is incorrect.");
     await signUserIn(user);
   } catch (error) {
-    throw new Error(error.message);
+    handleError(error.message);
   }
 };
 
