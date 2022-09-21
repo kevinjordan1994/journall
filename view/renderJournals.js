@@ -38,6 +38,11 @@ export function deleteJournalHTML(id) {
   const journalDivs = document.querySelectorAll(".journals__title-div");
   journalDivs.forEach((journal) => {
     if (journal.dataset.id === id) {
+      if (journalDivs.length === 1) {
+        journal.remove();
+        reRenderApp(noJournalsHTML);
+        return;
+      }
       journal.remove();
     }
   });

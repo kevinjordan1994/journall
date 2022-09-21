@@ -13,7 +13,7 @@ import {
   addNewEntry,
   targetJournal,
 } from "./model/journals.js";
-import renderEntries from "./view/renderEntries.js";
+import renderEntries, { deleteEntriesHTML } from "./view/renderEntries.js";
 import { renderError } from "./view/renderErrors.js";
 import { replaceData } from "./model/fetchData.js";
 
@@ -183,6 +183,7 @@ const deleteEntry = (id) => {
   targetJournal.entries = updatedEntries;
   setLocalJournals([targetJournal, ...otherJournals]);
   replaceData(`journals.json`, localJournals);
+  deleteEntriesHTML(id);
   clearModal();
 };
 
