@@ -38,16 +38,7 @@ export default function renderEntries(entries = []) {
   reRenderApp(generateEntriessHTML(entries));
 }
 
-export function deleteEntriesHTML(id) {
-  const entryDivs = document.querySelectorAll(".journals__title-div");
-  entryDivs.forEach((entry) => {
-    if (entry.dataset.id === id) {
-      if (entryDivs.length === 1) {
-        entry.remove();
-        reRenderApp(noEntriesHTML);
-        return;
-      }
-      entry.remove();
-    }
-  });
+export function formatEntryText(text) {
+  text = text.replace(/\n/g, "<br>");
+  return text;
 }

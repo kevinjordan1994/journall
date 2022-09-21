@@ -44,7 +44,7 @@ export function addNewEntry(title, content) {
     content,
     id: generateId(),
   };
-  sendEntryToDatabase(targetJournal, newEntry);
+  sendEntryToDatabase(newEntry);
 }
 
 const sendJournalToDatabase = (journalTitle, id) => {
@@ -55,7 +55,7 @@ const sendJournalToDatabase = (journalTitle, id) => {
   });
 };
 
-const sendEntryToDatabase = (journal, entry) => {
+const sendEntryToDatabase = (entry) => {
   const filteredJournals = localJournals.filter(
     (journal) => journal.id !== targetJournal.id
   );

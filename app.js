@@ -3,7 +3,7 @@
 import { renderModal } from "./view/renderModal.js";
 import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
 import { clearModal } from "./view/renderModal.js";
-import { checkForValidUser, currentUser } from "./model/userValidation.js";
+import { checkForValidUser } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
 import {
   addNewJournal,
@@ -13,7 +13,7 @@ import {
   addNewEntry,
   targetJournal,
 } from "./model/journals.js";
-import renderEntries, { deleteEntriesHTML } from "./view/renderEntries.js";
+import renderEntries, { formatEntryText } from "./view/renderEntries.js";
 import { renderError } from "./view/renderErrors.js";
 import { replaceData } from "./model/fetchData.js";
 
@@ -117,7 +117,8 @@ const activateAddEntryModal = () => {
   const entryContentInput = document.querySelector(".modal__entry__body-input");
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
-    addNewEntry(entryTitleInput.value, entryContentInput.value);
+    const entryText = formatEntryText(entryContentInput.value);
+    addNewEntry(entryTitleInput.value, entryText);
     clearModal();
     activateEntries(targetJournal.entries);
   });
@@ -129,8 +130,10 @@ const deleteJournal = () => {
   );
   deleteJournalHTML(targetJournal.id);
   setLocalJournals(filteredJournals);
+  if (localJournals.length === 0) {
+    activateJournals();
+  }
   replaceData(`journals.json`, localJournals);
-  clearModal();
 };
 
 const activateDeleteJournalModal = () => {
@@ -183,7 +186,7 @@ const deleteEntry = (id) => {
   targetJournal.entries = updatedEntries;
   setLocalJournals([targetJournal, ...otherJournals]);
   replaceData(`journals.json`, localJournals);
-  deleteEntriesHTML(id);
+  deleteJournalHTML(id);
   clearModal();
 };
 
@@ -226,6 +229,7 @@ const activateEntriesButtons = () => {
 
 export const activateEntries = (entries) => {
   renderEntries(entries);
+  clearModal();
   activateEntriesButtons();
   activateDeleteEntriesButtons();
 };

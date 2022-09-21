@@ -257,3 +257,7 @@ body {
   position: absolute;
   bottom: 0;
 }
+
+.modal__entry__body-input {
+  white-space: pre-wrap;
+}
