@@ -43,7 +43,6 @@ function generateInputs(inputs) {
       inputsHTML += `<input class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
     }
   });
-  console.log(inputsHTML);
   return inputsHTML;
 }
 

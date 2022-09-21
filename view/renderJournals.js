@@ -13,11 +13,12 @@ function generateJournalsHTML(journals = []) {
       <button class="button journals__add-button">Add JournAll</button>
       ${journals
         .map((journal) => {
-          return `<div class="journals__title-div" data-id="${journal.title}">
+          return `<div class="journals__title-div" data-id="${journal.id}">
           <h2>${journal.title}</h2>
             <p>${journal.entries?.length || `No`} ${
             journal.entries?.length === 1 ? "Entry" : "Entries"
           }</p>
+          <button class="journals__delete-btn">X</button>
         </div>`;
         })
         .join(" ")}

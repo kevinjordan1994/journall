@@ -4,3 +4,9 @@ app.js - control the flow of data between data and views.
 data - responsible for fetching data from the database and making it usable for app.js.
 views - responsible for rendering each piece of the application (including errors and loading).
 helpers - responsible for checking input validation among other things.
+
+Currently working on:
+Delete journals logic
+Delete entry logic
+Sign out button on journals
+Tooltips for icons

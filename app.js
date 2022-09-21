@@ -1,3 +1,5 @@
+`use strict`;
+
 import { renderModal } from "./view/renderModal.js";
 import renderJournals from "./view/renderJournals.js";
 import { clearModal } from "./view/renderModal.js";
@@ -13,6 +15,7 @@ import {
 } from "./model/journals.js";
 import renderEntries from "./view/renderEntries.js";
 import { renderError } from "./view/renderErrors.js";
+import { replaceData } from "./model/fetchData.js";
 
 //Query Selectors===========================================================
 //Sign in
@@ -53,6 +56,22 @@ export const newEntryModal = modal.createModal(
     {
       text: "Add Entry",
       class: "button__add-entry",
+    },
+  ]
+);
+
+export const deleteJournalModal = modal.createModal(
+  "Delete JournAll",
+  "Are you sure?",
+  null,
+  [
+    {
+      text: "Yes",
+      class: "button__confirm__delete-journal",
+    },
+    {
+      text: "No",
+      class: "button__deny__delete-journal",
     },
   ]
 );
@@ -100,6 +119,24 @@ const activateAddEntryModal = () => {
   });
 };
 
+const activateDeleteJournalModal = () => {
+  const noButton = document.querySelector(".button__deny__delete-journal");
+  const yesButton = document.querySelector(".button__confirm__delete-journal");
+  noButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    clearModal();
+  });
+  yesButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const filteredJournals = localJournals.filter(
+      (journal) => journal.id !== targetJournal.id
+    );
+    setLocalJournals(filteredJournals);
+    replaceData(`journals.json`, localJournals);
+    clearModal();
+  });
+};
+
 const activateJournalButton = () => {
   const newJournalButton = document.querySelector(".journals__add-button");
   newJournalButton.addEventListener("click", (event) => {
@@ -112,11 +149,14 @@ const activateJournalButton = () => {
 const activateJournalDivs = () => {
   const journalElements = document.querySelectorAll(".journals__title-div");
   journalElements.forEach((journal) =>
-    journal.addEventListener("click", () => {
+    journal.addEventListener("click", (event) => {
       const journalID = journal.dataset.id;
-      const targetJ = localJournals.find(
-        (journal) => journal.title === journalID
-      );
+      const targetJ = localJournals.find((journal) => journal.id === journalID);
+      if (event.target.classList.contains("journals__delete-btn")) {
+        renderModal(deleteJournalModal);
+        activateDeleteJournalModal();
+        return;
+      }
       activateEntries(targetJ.entries);
       setTargetJournal(targetJ);
     })
