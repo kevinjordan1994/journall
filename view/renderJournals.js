@@ -33,3 +33,12 @@ export default function renderJournals(journals = []) {
   }
   reRenderApp(generateJournalsHTML(journals));
 }
+
+export function deleteJournalHTML(id) {
+  const journalDivs = document.querySelectorAll(".journals__title-div");
+  journalDivs.forEach((journal) => {
+    if (journal.dataset.id === id) {
+      journal.remove();
+    }
+  });
+}

@@ -1,7 +1,7 @@
 `use strict`;
 
 import { renderModal } from "./view/renderModal.js";
-import renderJournals from "./view/renderJournals.js";
+import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
 import { clearModal } from "./view/renderModal.js";
 import { checkForValidUser, currentUser } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
@@ -82,18 +82,6 @@ signInButton.addEventListener(`click`, (event) => {
   renderModal();
 });
 
-const refreshJournals = (
-  newJournals = currentUser.journals,
-  viewingJournals = true
-) => {
-  setLocalJournals(newJournals);
-  viewingJournals
-    ? renderJournals(localJournals)
-    : renderEntries(
-        localJournals.find((journal) => journal.title === targetJournal.title)
-      );
-};
-
 const activateAddJournalModal = () => {
   const addJournalButton = document.querySelector(".button__add-journal");
   const journalTitleInput = document.querySelector(".modal__title-input");
@@ -119,6 +107,16 @@ const activateAddEntryModal = () => {
   });
 };
 
+const deleteJournal = () => {
+  const filteredJournals = localJournals.filter(
+    (journal) => journal.id !== targetJournal.id
+  );
+  deleteJournalHTML(targetJournal.id);
+  setLocalJournals(filteredJournals);
+  replaceData(`journals.json`, localJournals);
+  clearModal();
+};
+
 const activateDeleteJournalModal = () => {
   const noButton = document.querySelector(".button__deny__delete-journal");
   const yesButton = document.querySelector(".button__confirm__delete-journal");
@@ -128,12 +126,7 @@ const activateDeleteJournalModal = () => {
   });
   yesButton.addEventListener("click", (event) => {
     event.preventDefault();
-    const filteredJournals = localJournals.filter(
-      (journal) => journal.id !== targetJournal.id
-    );
-    setLocalJournals(filteredJournals);
-    replaceData(`journals.json`, localJournals);
-    clearModal();
+    deleteJournal();
   });
 };
 
@@ -154,6 +147,7 @@ const activateJournalDivs = () => {
       const targetJ = localJournals.find((journal) => journal.id === journalID);
       if (event.target.classList.contains("journals__delete-btn")) {
         renderModal(deleteJournalModal);
+        setTargetJournal(targetJ);
         activateDeleteJournalModal();
         return;
       }
@@ -180,7 +174,7 @@ export const activateEntries = (entries) => {
 };
 
 export const activateJournals = () => {
-  refreshJournals(localJournals);
+  renderJournals(localJournals);
   clearModal();
   activateJournalButton();
   activateJournalDivs();
