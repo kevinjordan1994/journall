@@ -141,6 +141,7 @@ body {
 
 .sign-in__card {
   width: fit-content;
+  max-width: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -243,6 +244,17 @@ body {
   text-decoration: underline;
 }
 
+@media (max-width: 600px) {
+  .journals__main {
+    padding-top: 10%;
+  }
+
+  .journals__card {
+    height: 90%;
+    max-height: 90%;
+  }
+}
+
 /* ENTRIES =====================================================*/
 
 .entries__add-button {
@@ -255,7 +267,8 @@ body {
 .entries__back-arrow {
   width: 3rem;
   position: absolute;
-  bottom: 0;
+  bottom: 8%;
+  left: 8%;
 }
 
 .modal__entry__body-input {
