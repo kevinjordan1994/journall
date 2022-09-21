@@ -76,6 +76,22 @@ export const deleteJournalModal = modal.createModal(
   ]
 );
 
+export const deleteEntryModal = modal.createModal(
+  "Delete Entry",
+  "Are you sure?",
+  null,
+  [
+    {
+      text: "Yes",
+      class: "button__confirm__delete-entry",
+    },
+    {
+      text: "No",
+      class: "button__deny__delete-entry",
+    },
+  ]
+);
+
 signInButton.addEventListener(`click`, (event) => {
   event.preventDefault();
   checkForValidUser(userNameInput.value, passwordInput.value);
@@ -157,6 +173,45 @@ const activateJournalDivs = () => {
   );
 };
 
+const deleteEntry = (id) => {
+  const otherJournals = localJournals.filter(
+    (journal) => journal.id !== targetJournal.id
+  );
+  const updatedEntries = targetJournal.entries.filter(
+    (entry) => entry.id !== id
+  );
+  targetJournal.entries = updatedEntries;
+  setLocalJournals([targetJournal, ...otherJournals]);
+  replaceData(`journals.json`, localJournals);
+  clearModal();
+};
+
+const activateDeleteEntriesModal = (id) => {
+  const noButton = document.querySelector(".button__deny__delete-entry");
+  const yesButton = document.querySelector(".button__confirm__delete-entry");
+  noButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    clearModal();
+  });
+  yesButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteEntry(id);
+  });
+};
+
+const activateDeleteEntriesButtons = () => {
+  const entryDivs = document.querySelectorAll(".journals__title-div");
+  entryDivs.forEach((div) =>
+    div.addEventListener("click", (event) => {
+      if (event.target.classList.contains("entries__delete-btn")) {
+        event.preventDefault();
+        renderModal(deleteEntryModal);
+        activateDeleteEntriesModal(div.dataset.id);
+      }
+    })
+  );
+};
+
 const activateEntriesButtons = () => {
   const backToJournalsButton = document.querySelector(".entries__back-arrow");
   const addEntryButton = document.querySelector(".entries__add-button");
@@ -171,6 +226,7 @@ const activateEntriesButtons = () => {
 export const activateEntries = (entries) => {
   renderEntries(entries);
   activateEntriesButtons();
+  activateDeleteEntriesButtons();
 };
 
 export const activateJournals = () => {

@@ -13,9 +13,11 @@ const generateModalHTML = (modal = { title: "Loading" }) => {
     <div class="modal__button-div">
     ${
       modal.buttons
-        ? modal.buttons.map((button) => {
-            return `<button class="button modal__button ${button.class}">${button.text}</button>`;
-          })
+        ? modal.buttons
+            .map((button) => {
+              return `<button class="button modal__button ${button.class}">${button.text}</button>`;
+            })
+            .join(" ")
         : ""
     }
     </div>

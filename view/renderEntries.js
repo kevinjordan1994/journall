@@ -16,9 +16,10 @@ function generateEntriessHTML(entries = []) {
     <button class="button entries__add-button">Add Entry</button>
       ${entries
         .map((entry) => {
-          return `<div class="journals__title-div" data-id="${entry.title}">
+          return `<div class="journals__title-div" data-id="${entry.id}">
           <h2>${entry.title}</h2>
             <p>${entry.content}</p>
+            <button class="entries__delete-btn">X</button>
         </div>`;
         })
         .join(" ")}

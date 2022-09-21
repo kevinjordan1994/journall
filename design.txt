@@ -6,7 +6,6 @@ views - responsible for rendering each piece of the application (including error
 helpers - responsible for checking input validation among other things.
 
 Currently working on:
-Delete journals logic
 Delete entry logic
 Sign out button on journals
 Tooltips for icons
