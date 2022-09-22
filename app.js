@@ -133,6 +133,7 @@ const deleteJournal = () => {
   if (localJournals.length === 0) {
     activateJournals();
   }
+  clearModal();
   replaceData(`journals.json`, localJournals);
 };
 

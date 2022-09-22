@@ -6,6 +6,7 @@ const generateModalHTML = (modal = { title: "Loading" }) => {
     <div class="modal__header">
       <h2 class="modal__title">${modal.title}</h2>
     </div>
+    <form>
     <div class="modal__content-div">
       ${modal.content ? `<p class="modal__content">${modal.content}</p>` : ""}
       ${modal.inputs ? generateInputs(modal.inputs) : ""}
@@ -21,6 +22,7 @@ const generateModalHTML = (modal = { title: "Loading" }) => {
         : ""
     }
     </div>
+    </form>
     </div>`;
 };
 
@@ -40,9 +42,9 @@ function generateInputs(inputs) {
   let inputsHTML = "";
   inputs.forEach((input) => {
     if (input.textarea) {
-      inputsHTML += `<textarea class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"></textarea>`;
+      inputsHTML += `<textarea class="modal__textarea ${input.class}" type="${input.type}" placeholder="${input.placeholder}"></textarea>`;
     } else {
-      inputsHTML += `<input class="${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
+      inputsHTML += `<input class="modal__input ${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
     }
   });
   return inputsHTML;
