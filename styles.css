@@ -236,7 +236,7 @@ body {
 
 .journals__main {
   height: 100vh;
-  padding: 2rem;
+  padding: 10rem;
   background: linear-gradient(#fff, var(--secondary-color));
 }
 
