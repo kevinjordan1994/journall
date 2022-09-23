@@ -2,6 +2,7 @@
 
 import { renderModal } from "./view/renderModal.js";
 import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
+import renderEntryPage from "./view/renderEntryPage.js";
 import { clearModal } from "./view/renderModal.js";
 import { checkForValidUser } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
@@ -32,30 +33,6 @@ export const newJournalModal = modal.createModal(
     {
       text: "Add JournAll",
       class: "button__add-journal",
-    },
-  ]
-);
-
-export const newEntryModal = modal.createModal(
-  "New Entry",
-  "",
-  [
-    {
-      type: "text",
-      placeholder: "Title",
-      class: "modal__entry__title-input",
-    },
-    {
-      type: "text",
-      placeholder: "What's on your mind?",
-      class: "modal__entry__body-input",
-      textarea: true,
-    },
-  ],
-  [
-    {
-      text: "Add Entry",
-      class: "button__add-entry",
     },
   ]
 );
@@ -194,15 +171,15 @@ const activateJournalDivs = () => {
   );
 };
 
-const activateAddEntryModal = () => {
+const activateAddEntryPage = () => {
+  renderEntryPage();
   const addEntryButton = document.querySelector(".button__add-entry");
-  const entryTitleInput = document.querySelector(".modal__entry__title-input");
-  const entryContentInput = document.querySelector(".modal__entry__body-input");
+  const entryTitleInput = document.querySelector(".entry__input");
+  const entryContentInput = document.querySelector(".entry__textarea");
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
     const entryText = formatEntryText(entryContentInput.value);
     addNewEntry(entryTitleInput.value, entryText);
-    clearModal();
     activateEntries(targetJournal.entries);
   });
 };
@@ -253,8 +230,7 @@ const activateEntriesButtons = () => {
   backToJournalsButton.addEventListener(`click`, activateJournals);
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
-    renderModal(newEntryModal);
-    activateAddEntryModal();
+    activateAddEntryPage();
   });
 };
 

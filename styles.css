@@ -106,14 +106,6 @@ body {
   text-align: center;
 }
 
-.modal__textarea {
-  width: 50%;
-  min-width: 16rem;
-  min-height: 20rem;
-  resize: none;
-  font-size: 1rem;
-}
-
 /* ERRORS ======================================================*/
 .error__card {
   width: fit-content;
@@ -315,6 +307,43 @@ body {
   left: 8%;
 }
 
-.modal__entry__body-input {
-  white-space: pre-wrap;
+.entry__card {
+  background-color: #fff;
+  padding: 2rem;
+  max-width: 100%;
+  width: 25rem;
+  min-width: 30%;
+  margin: 0 auto;
+}
+
+.entry__form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.entry__title-input,
+.entry__content-input {
+  width: 100%;
+}
+
+.entry__input {
+  display: inline-block;
+  width: 100%;
+  font-size: 2rem;
+}
+
+.entry__textarea {
+  display: inline-block;
+  width: 100%;
+  min-width: 12rem;
+  min-height: 20rem;
+  resize: none;
+  font-size: 1rem;
+}
+
+.entry__btn-div {
+  width: 100%;
 }
