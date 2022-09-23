@@ -1,5 +1,5 @@
 `use strict`;
-
+//#region Imports
 import { renderModal } from "./view/renderModal.js";
 import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
 import renderEntryPage from "./view/renderEntryPage.js";
@@ -17,15 +17,24 @@ import {
 import renderEntries, { formatEntryText } from "./view/renderEntries.js";
 import { renderError } from "./view/renderErrors.js";
 import { replaceData } from "./model/fetchData.js";
+//#endregion
 
-//Query Selectors===========================================================
-//Sign in
+//Sign in==================================================================
+//#region Sign in
 const userNameInput = document.querySelector(".sign-in__user-name");
 const passwordInput = document.querySelector(".sign-in__password");
 const signInButton = document.querySelector(".sign-in__button");
 
+signInButton.addEventListener(`click`, (event) => {
+  event.preventDefault();
+  checkForValidUser(userNameInput.value, passwordInput.value);
+  renderModal();
+});
+//#endregion
+
 //Init Modals===============================================================
-export const newJournalModal = modal.createModal(
+//#region Modals
+const newJournalModal = modal.createModal(
   "New JournAll",
   "",
   [{ type: "text", placeholder: "New JournAll", class: "modal__title-input" }],
@@ -37,7 +46,7 @@ export const newJournalModal = modal.createModal(
   ]
 );
 
-export const deleteJournalModal = modal.createModal(
+const deleteJournalModal = modal.createModal(
   "Delete JournAll",
   "Are you sure?",
   null,
@@ -66,7 +75,7 @@ const editJournalModal = modal.createModal(
     {
       type: "text",
       placeholder: editPlaceholder,
-      class: "modal__title-input",
+      class: "modal__edit-title-input",
     },
   ],
   [
@@ -74,10 +83,14 @@ const editJournalModal = modal.createModal(
       text: "Update JournAll",
       class: "button__edit-journal",
     },
+    {
+      text: "Cancel",
+      class: "button__cancel__edit-journal",
+    },
   ]
 );
 
-export const deleteEntryModal = modal.createModal(
+const deleteEntryModal = modal.createModal(
   "Delete Entry",
   "Are you sure?",
   null,
@@ -92,12 +105,41 @@ export const deleteEntryModal = modal.createModal(
     },
   ]
 );
+//#endregion
 
-signInButton.addEventListener(`click`, (event) => {
-  event.preventDefault();
-  checkForValidUser(userNameInput.value, passwordInput.value);
-  renderModal();
-});
+//Journal===================================================================
+//#region Journal Functions
+const updateJournalTitle = (value) => {
+  if (value.trim().length === 0) {
+    handleError("JournAll title can't be empty!");
+    return;
+  }
+  const filteredJournals = localJournals.filter(
+    (journal) => journal.id !== targetJournal.id
+  );
+  targetJournal.title = value;
+  setLocalJournals([targetJournal, ...filteredJournals]);
+  clearModal();
+  renderJournals(localJournals);
+  activateJournalDivs();
+  activateJournalButton();
+  replaceData(`journals.json`, localJournals);
+};
+
+const activateEditJournalModal = () => {
+  const editedTitleInput = document.querySelector(".modal__edit-title-input");
+  const updateJournalButton = document.querySelector(".button__edit-journal");
+  const cancelButton = document.querySelector(".button__cancel__edit-journal");
+  updateJournalButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    updateJournalTitle(editedTitleInput.value);
+    clearModal();
+  });
+  cancelButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    clearModal();
+  });
+};
 
 const activateAddJournalModal = () => {
   const addJournalButton = document.querySelector(".button__add-journal");
@@ -162,6 +204,7 @@ const activateJournalDivs = () => {
       if (event.target.classList.contains("journals__edit-btn")) {
         setEditPlaceholder(targetJ.title);
         renderModal(editJournalModal);
+        activateEditJournalModal();
         return;
       }
       if (event.target.classList.contains("journals__title")) {
@@ -170,7 +213,10 @@ const activateJournalDivs = () => {
     })
   );
 };
+//#endregion
 
+//Entries===================================================================
+//#region Entry Functions
 const activateAddEntryPage = () => {
   renderEntryPage();
   const addEntryButton = document.querySelector(".button__add-entry");
@@ -233,6 +279,7 @@ const activateEntriesButtons = () => {
     activateAddEntryPage();
   });
 };
+//#endregion
 
 export const activateEntries = (entries) => {
   renderEntries(entries);
