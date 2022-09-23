@@ -76,6 +76,30 @@ export const deleteJournalModal = modal.createModal(
   ]
 );
 
+let editPlaceholder = "New Title";
+
+const setEditPlaceholder = (string) => {
+  editPlaceholder = string;
+};
+
+const editJournalModal = modal.createModal(
+  "Edit JournAll",
+  "",
+  [
+    {
+      type: "text",
+      placeholder: editPlaceholder,
+      class: "modal__title-input",
+    },
+  ],
+  [
+    {
+      text: "Update JournAll",
+      class: "button__edit-journal",
+    },
+  ]
+);
+
 export const deleteEntryModal = modal.createModal(
   "Delete Entry",
   "Are you sure?",
@@ -108,19 +132,6 @@ const activateAddJournalModal = () => {
     activateJournalDivs();
     activateJournalButton();
     clearModal();
-  });
-};
-
-const activateAddEntryModal = () => {
-  const addEntryButton = document.querySelector(".button__add-entry");
-  const entryTitleInput = document.querySelector(".modal__entry__title-input");
-  const entryContentInput = document.querySelector(".modal__entry__body-input");
-  addEntryButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const entryText = formatEntryText(entryContentInput.value);
-    addNewEntry(entryTitleInput.value, entryText);
-    clearModal();
-    activateEntries(targetJournal.entries);
   });
 };
 
@@ -165,16 +176,35 @@ const activateJournalDivs = () => {
     journal.addEventListener("click", (event) => {
       const journalID = journal.dataset.id;
       const targetJ = localJournals.find((journal) => journal.id === journalID);
+      setTargetJournal(targetJ);
       if (event.target.classList.contains("journals__delete-btn")) {
         renderModal(deleteJournalModal);
-        setTargetJournal(targetJ);
         activateDeleteJournalModal();
         return;
       }
-      activateEntries(targetJ.entries);
-      setTargetJournal(targetJ);
+      if (event.target.classList.contains("journals__edit-btn")) {
+        setEditPlaceholder(targetJ.title);
+        renderModal(editJournalModal);
+        return;
+      }
+      if (event.target.classList.contains("journals__title")) {
+        activateEntries(targetJ.entries);
+      }
     })
   );
+};
+
+const activateAddEntryModal = () => {
+  const addEntryButton = document.querySelector(".button__add-entry");
+  const entryTitleInput = document.querySelector(".modal__entry__title-input");
+  const entryContentInput = document.querySelector(".modal__entry__body-input");
+  addEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const entryText = formatEntryText(entryContentInput.value);
+    addNewEntry(entryTitleInput.value, entryText);
+    clearModal();
+    activateEntries(targetJournal.entries);
+  });
 };
 
 const deleteEntry = (id) => {

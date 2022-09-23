@@ -23,11 +23,22 @@ body {
   border: none;
   border-radius: 0.25rem;
   color: #fff;
+  align-self: flex-start;
 }
 
 .button:hover,
 .button:active {
   background: var(--primary-color);
+  cursor: pointer;
+}
+
+.icon {
+  width: 1.5rem;
+  border: none;
+  background-color: #fff;
+}
+
+.icon:hover {
   cursor: pointer;
 }
 
@@ -152,8 +163,14 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: url(/images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg);
-  background-repeat: no-repeat;
+}
+
+.sign-in__img {
+  text-align: center;
+}
+
+.sign-in__img img {
+  opacity: 0.75;
 }
 
 .sign-in__titles {
@@ -227,7 +244,7 @@ body {
 
 .journals__main {
   height: 100vh;
-  padding-top: 10rem;
+  padding: 2rem;
   background: linear-gradient(#fff, var(--secondary-color));
 }
 
@@ -237,8 +254,8 @@ body {
   width: 90%;
   max-width: 30rem;
   margin: 0 auto;
-  height: 70%;
-  max-height: 70%;
+  height: 100%;
+  max-height: 100%;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   overflow-y: scroll;
   overflow-x: hidden;
@@ -257,15 +274,18 @@ body {
   color: #101010;
   border-bottom: 2px dotted var(--primary-color);
   width: 80%;
-  margin: 0 auto;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-.journals__title-div:hover {
+.journals__btn-div {
+  display: flex;
+  gap: 1rem;
+}
+
+.journals__title:hover {
   cursor: pointer;
-}
-
-.journals__title-div:hover h2 {
-  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
