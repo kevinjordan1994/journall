@@ -23,6 +23,7 @@ function generateEntriessHTML(entries = []) {
             </div>
             <div class="journals__btn-div">
             <button class="button entries__delete-btn">Delete</button>
+            <button class="button entries__edit-btn">Edit</button>
             </div>
         </div>`;
         })

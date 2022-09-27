@@ -230,6 +230,34 @@ const activateAddEntryPage = () => {
   });
 };
 
+const activateEditEntryPage = (id) => {
+  renderEntryPage();
+  const addEntryButton = document.querySelector(".button__add-entry");
+  const entryTitleInput = document.querySelector(".entry__input");
+  const entryContentInput = document.querySelector(".entry__textarea");
+  const targetEntry = targetJournal.entries.find((entry) => entry.id === id);
+  entryTitleInput.value = targetEntry.title;
+  entryContentInput.value = targetEntry.content;
+  addEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const updatedEntry = {
+      title: entryTitleInput.value,
+      content: formatEntryText(entryContentInput.value),
+      id,
+    };
+    const filteredEntries = targetJournal.entries.filter(
+      (entry) => entry.id !== id
+    );
+    targetJournal.entries = [updatedEntry, ...filteredEntries];
+    const otherJournals = localJournals.filter(
+      (journal) => journal.id !== targetJournal.id
+    );
+    setLocalJournals([targetJournal, ...otherJournals]);
+    activateEntries(targetJournal.entries);
+    replaceData(`journals.json`, localJournals);
+  });
+};
+
 const deleteEntry = (id) => {
   const otherJournals = localJournals.filter(
     (journal) => journal.id !== targetJournal.id
@@ -257,7 +285,7 @@ const activateDeleteEntriesModal = (id) => {
   });
 };
 
-const activateDeleteEntriesButtons = () => {
+const activateDeleteAndEditEntriesButtons = () => {
   const entryDivs = document.querySelectorAll(".journals__title-div");
   entryDivs.forEach((div) =>
     div.addEventListener("click", (event) => {
@@ -265,6 +293,10 @@ const activateDeleteEntriesButtons = () => {
         event.preventDefault();
         renderModal(deleteEntryModal);
         activateDeleteEntriesModal(div.dataset.id);
+      }
+      if (event.target.classList.contains("entries__edit-btn")) {
+        activateEditEntryPage(div.dataset.id);
+        return;
       }
     })
   );
@@ -285,7 +317,7 @@ export const activateEntries = (entries) => {
   renderEntries(entries);
   clearModal();
   activateEntriesButtons();
-  activateDeleteEntriesButtons();
+  activateDeleteAndEditEntriesButtons();
 };
 
 export const activateJournals = () => {
