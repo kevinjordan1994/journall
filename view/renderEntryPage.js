@@ -19,6 +19,7 @@ const generateAddEntryHTML = (titleValue, contentValue) => {
         <button class="button button__add-entry">${
           isUpdating ? "Update Entry" : "Add Entry"
         }</button>
+        <button class="button button__cancel-entry">Cancel</button>
       </div>
     </div>
     </form>

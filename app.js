@@ -105,6 +105,22 @@ const deleteEntryModal = modal.createModal(
     },
   ]
 );
+
+const warningModal = modal.createModal(
+  "Warning!",
+  "You're changes will not be saved. Are you sure?",
+  null,
+  [
+    {
+      text: "Yes",
+      class: "button__confirm__warning",
+    },
+    {
+      text: "No",
+      class: "button__deny__warning",
+    },
+  ]
+);
 //#endregion
 
 //Journal===================================================================
@@ -220,6 +236,7 @@ const activateJournalDivs = () => {
 const activateAddEntryPage = () => {
   renderEntryPage();
   const addEntryButton = document.querySelector(".button__add-entry");
+  const cancelEntryButton = document.querySelector(".button__cancel-entry");
   const entryTitleInput = document.querySelector(".entry__input");
   const entryContentInput = document.querySelector(".entry__textarea");
   addEntryButton.addEventListener("click", (event) => {
@@ -228,11 +245,37 @@ const activateAddEntryPage = () => {
     addNewEntry(entryTitleInput.value, entryText);
     activateEntries(targetJournal.entries);
   });
+  cancelEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (
+      entryTitleInput.value.trim().length === 0 &&
+      entryContentInput.value.trim().length === 0
+    ) {
+      activateEntries(targetJournal.entries);
+      return;
+    }
+    renderModal(warningModal);
+    activateWarningModal();
+  });
+};
+
+const activateWarningModal = () => {
+  const yesButton = document.querySelector(".button__confirm__warning");
+  const noButton = document.querySelector(".button__deny__warning");
+  noButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    clearModal();
+  });
+  yesButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    activateEntries(targetJournal.entries);
+  });
 };
 
 const activateEditEntryPage = (id) => {
   renderEntryPage();
   const addEntryButton = document.querySelector(".button__add-entry");
+  const cancelEntryButton = document.querySelector(".button__cancel-entry");
   const entryTitleInput = document.querySelector(".entry__input");
   const entryContentInput = document.querySelector(".entry__textarea");
   const targetEntry = targetJournal.entries.find((entry) => entry.id === id);
@@ -255,6 +298,18 @@ const activateEditEntryPage = (id) => {
     setLocalJournals([targetJournal, ...otherJournals]);
     activateEntries(targetJournal.entries);
     replaceData(`journals.json`, localJournals);
+  });
+  cancelEntryButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (
+      entryTitleInput.value.trim().length === 0 &&
+      entryContentInput.value.trim().length === 0
+    ) {
+      activateEntries(targetJournal.entries);
+      return;
+    }
+    renderModal(warningModal);
+    activateWarningModal();
   });
 };
 
