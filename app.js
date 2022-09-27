@@ -17,6 +17,7 @@ import {
 import renderEntries, { formatEntryText } from "./view/renderEntries.js";
 import { renderError } from "./view/renderErrors.js";
 import { replaceData } from "./model/fetchData.js";
+import toggleNav from "./view/toggleNav.js";
 //#endregion
 
 //Sign in==================================================================
@@ -375,6 +376,7 @@ export const activateEntries = (entries) => {
 
 export const activateJournals = () => {
   renderJournals(localJournals);
+  toggleNav();
   clearModal();
   activateJournalButton();
   activateJournalDivs();

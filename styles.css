@@ -232,6 +232,29 @@ body {
   gap: 0.25rem;
 }
 
+/* NAV ==========================================================*/
+.nav {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__icons-list {
+  list-style: none;
+}
+
+.nav__back-arrow {
+  width: 2rem;
+}
+
+.nav__back-arrow:hover {
+  cursor: pointer;
+}
+
 /* JOURNALS =====================================================*/
 
 .journals__main {

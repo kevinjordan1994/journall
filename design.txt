@@ -6,7 +6,6 @@ views - responsible for rendering each piece of the application (including error
 helpers - responsible for checking input validation among other things.
 
 Currently working on:
-Prevent user from accidently closing modal when working on a journal entry (losing progress)
 Sign out button on journals
+Navbar
 Tooltips for icons
-Add forms to modals so it submits on Enter
