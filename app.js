@@ -273,14 +273,12 @@ const activateWarningModal = () => {
 };
 
 const activateEditEntryPage = (id) => {
-  renderEntryPage();
+  const targetEntry = targetJournal.entries.find((entry) => entry.id === id);
+  renderEntryPage(targetEntry.title, targetEntry.content);
   const addEntryButton = document.querySelector(".button__add-entry");
   const cancelEntryButton = document.querySelector(".button__cancel-entry");
   const entryTitleInput = document.querySelector(".entry__input");
   const entryContentInput = document.querySelector(".entry__textarea");
-  const targetEntry = targetJournal.entries.find((entry) => entry.id === id);
-  entryTitleInput.value = targetEntry.title;
-  entryContentInput.value = targetEntry.content;
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
     const updatedEntry = {
