@@ -236,7 +236,7 @@ body {
 
 .journals__main {
   height: 100vh;
-  padding: 2rem;
+  padding: 10rem 0;
   background: linear-gradient(#fff, var(--secondary-color));
 }
 
@@ -282,7 +282,7 @@ body {
 
 @media (max-width: 600px) {
   .journals__main {
-    padding-top: 10%;
+    padding: 4rem 0;
   }
 
   .journals__card {
