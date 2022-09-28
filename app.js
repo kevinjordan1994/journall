@@ -124,6 +124,21 @@ const warningModal = modal.createModal(
 );
 //#endregion
 
+//#region Helpers
+
+const checkForBlankInputs = (...inputs) => {
+  let isBlankInput = false;
+  inputs.forEach((input) => {
+    if (input.value.trim() === "") {
+      handleError(`Can't submit with blank inputs.`);
+      isBlankInput = true;
+    }
+  });
+  return isBlankInput;
+};
+
+//#endregion
+
 //Journal===================================================================
 //#region Journal Functions
 const updateJournalTitle = (value) => {
@@ -242,6 +257,7 @@ const activateAddEntryPage = () => {
   const entryContentInput = document.querySelector(".entry__textarea");
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
+    if (checkForBlankInputs(entryContentInput, entryTitleInput)) return;
     const entryText = formatEntryText(entryContentInput.value);
     addNewEntry(entryTitleInput.value, entryText);
     activateEntries(targetJournal.entries);
@@ -357,7 +373,7 @@ const activateDeleteAndEditEntriesButtons = () => {
 };
 
 const activateEntriesButtons = () => {
-  const backToJournalsButton = document.querySelector(".entries__back-arrow");
+  const backToJournalsButton = document.querySelector(".nav__back-arrow");
   const addEntryButton = document.querySelector(".entries__add-button");
   backToJournalsButton.addEventListener(`click`, activateJournals);
   addEntryButton.addEventListener("click", (event) => {
@@ -376,7 +392,9 @@ export const activateEntries = (entries) => {
 
 export const activateJournals = () => {
   renderJournals(localJournals);
-  toggleNav();
+  if (document.querySelector(".nav").classList.contains("hidden")) {
+    toggleNav();
+  }
   clearModal();
   activateJournalButton();
   activateJournalDivs();

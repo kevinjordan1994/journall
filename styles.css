@@ -42,8 +42,8 @@ body {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
+.fancy {
+  font-family: "Satisfy", cursive;
 }
 
 /* MODALS ======================================================*/
@@ -374,4 +374,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+/* HIDDEN ============================================*/
+.hidden {
+  display: none;
 }

@@ -9,3 +9,7 @@ Currently working on:
 Sign out button on journals
 Navbar
 Tooltips for icons
+
+Features to add:
+Input validation on journal/entry submission (can't submit blank forms)
+

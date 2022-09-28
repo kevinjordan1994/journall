@@ -11,6 +11,12 @@
       href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="app.js" type="module"></script>
   </head>
@@ -19,62 +25,64 @@
       <div class="modal__backdrop hidden"></div>
     </div>
     <div class="errors"></div>
-    <nav class="nav hidden">
-      <h2 class="nav__brand">JournAll</h2>
-      <ul class="nav__icons-list">
-        <li class="nav__icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 nav__back-arrow"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+    <main class="app__page">
+      <nav class="nav hidden">
+        <h2 class="nav__brand fancy">JournAll</h2>
+        <ul class="nav__icons-list">
+          <li class="nav__icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 nav__back-arrow"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+              />
+            </svg>
+          </li>
+        </ul>
+      </nav>
+      <section class="app__container">
+        <div class="sign-in__main">
+          <div class="sign-in__img">
+            <img
+              src="images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg"
+              alt="Waterfalls"
             />
-          </svg>
-        </li>
-      </ul>
-    </nav>
-    <main class="app__container">
-      <div class="sign-in__main">
-        <div class="sign-in__img">
-          <img
-            src="images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg"
-            alt="Waterfalls"
-          />
-        </div>
-        <div class="sign-in__card">
-          <div class="sign-in__titles">
-            <h1 class="sign-in__title">JournAll</h1>
-            <p class="sign-in__sub-title">
-              A place for all of your thoughts and ideas
-            </p>
           </div>
-          <form class="sign-in__form">
-            <div class="sign-in__input-div">
-              <input
-                class="sign-in__input sign-in__user-name"
-                placeholder="Your Name"
-                type="text"
-              />
-              <input
-                class="sign-in__input sign-in__password"
-                type="password"
-                placeholder="Password"
-              />
+          <div class="sign-in__card">
+            <div class="sign-in__titles">
+              <h1 class="sign-in__title fancy">JournAll</h1>
+              <p class="sign-in__sub-title">
+                A place for all of your thoughts and ideas
+              </p>
             </div>
-            <div class="sign-in__buttons-div">
-              <button class="button sign-in__button">Sign In</button>
-              <button class="button sign-in__button">New Account</button>
-            </div>
-          </form>
+            <form class="sign-in__form">
+              <div class="sign-in__input-div">
+                <input
+                  class="sign-in__input sign-in__user-name"
+                  placeholder="Your Name"
+                  type="text"
+                />
+                <input
+                  class="sign-in__input sign-in__password"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="sign-in__buttons-div">
+                <button class="button sign-in__button">Sign In</button>
+                <button class="button sign-in__button">New Account</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   </body>
 </html>
