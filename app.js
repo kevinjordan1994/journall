@@ -137,6 +137,10 @@ const checkForBlankInputs = (...inputs) => {
   return isBlankInput;
 };
 
+const filterJournals = (id) => {
+  return localJournals.filter((journal) => journal.id !== id);
+};
+
 //#endregion
 
 //Journal===================================================================
@@ -308,9 +312,7 @@ const activateEditEntryPage = (id) => {
       (entry) => entry.id !== id
     );
     targetJournal.entries = [updatedEntry, ...filteredEntries];
-    const otherJournals = localJournals.filter(
-      (journal) => journal.id !== targetJournal.id
-    );
+    const otherJournals = filterJournals(targetJournal.id);
     setLocalJournals([targetJournal, ...otherJournals]);
     activateEntries(targetJournal.entries);
     replaceData(`journals.json`, localJournals);
@@ -330,9 +332,7 @@ const activateEditEntryPage = (id) => {
 };
 
 const deleteEntry = (id) => {
-  const otherJournals = localJournals.filter(
-    (journal) => journal.id !== targetJournal.id
-  );
+  const otherJournals = filterJournals(targetJournal.id);
   const updatedEntries = targetJournal.entries.filter(
     (entry) => entry.id !== id
   );

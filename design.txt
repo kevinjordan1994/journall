@@ -11,3 +11,5 @@ Sign out button on journals
 Navbar
 Tooltips for icons
 
+features to add:
+sort journals and entries by date added
