@@ -298,6 +298,7 @@ const activateEditEntryPage = (id) => {
   const entryContentInput = document.querySelector(".entry__textarea");
   addEntryButton.addEventListener("click", (event) => {
     event.preventDefault();
+    if (checkForBlankInputs(entryContentInput, entryTitleInput)) return;
     const updatedEntry = {
       title: entryTitleInput.value,
       content: formatEntryText(entryContentInput.value),
@@ -339,6 +340,9 @@ const deleteEntry = (id) => {
   setLocalJournals([targetJournal, ...otherJournals]);
   replaceData(`journals.json`, localJournals);
   deleteJournalHTML(id);
+  if (targetJournal.entries.length === 0) {
+    activateEntries(targetJournal.entries);
+  }
   clearModal();
 };
 
@@ -356,7 +360,7 @@ const activateDeleteEntriesModal = (id) => {
 };
 
 const activateDeleteAndEditEntriesButtons = () => {
-  const entryDivs = document.querySelectorAll(".journals__title-div");
+  const entryDivs = document.querySelectorAll(".entries__title-div");
   entryDivs.forEach((div) =>
     div.addEventListener("click", (event) => {
       if (event.target.classList.contains("entries__delete-btn")) {

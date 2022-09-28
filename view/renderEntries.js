@@ -3,7 +3,7 @@ import { reRenderApp } from "../views.js";
 const noEntriesHTML = `<div class="journals__main">
 <div class="journals__card">
 <button class="button entries__add-button">Add Entry</button>
-  <p>No Entries yet...</p>
+  <p class="journals__none-message">No Entries yet...</p>
   </div>
 </div>`;
 
@@ -13,15 +13,15 @@ function generateEntriessHTML(entries = []) {
     <button class="button entries__add-button">Add Entry</button>
       ${entries
         .map((entry) => {
-          return `<div class="journals__title-div" data-id="${entry.id}">
-          <div class="entries__info">
+          return `<div class="entries__title-div" data-id="${entry.id}">
+          <div class="entries__header">
           <h2>${entry.title}</h2>
-            <p>${entry.content}</p>
+          <div class="journals__btn-div">
+          <button class="button entries__delete-btn">Delete</button>
+          <button class="button entries__edit-btn">Edit</button>
+          </div>
             </div>
-            <div class="journals__btn-div">
-            <button class="button entries__delete-btn">Delete</button>
-            <button class="button entries__edit-btn">Edit</button>
-            </div>
+          <p>${entry.content}</p>
         </div>`;
         })
         .join(" ")}

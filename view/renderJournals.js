@@ -3,7 +3,7 @@ import { reRenderApp } from "../views.js";
 const noJournalsHTML = `<div class="journals__main">
 <div class="journals__card">
 <button class="button journals__add-button">Add JournAll</button>
-  <p>No JournAlls found...</p>
+  <p class="journals__none-message">No JournAlls found...</p>
 </div>
 </div>`;
 

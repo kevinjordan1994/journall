@@ -6,10 +6,8 @@ views - responsible for rendering each piece of the application (including error
 helpers - responsible for checking input validation among other things.
 
 Currently working on:
+Refactor
 Sign out button on journals
 Navbar
 Tooltips for icons
-
-Features to add:
-Input validation on journal/entry submission (can't submit blank forms)
 
