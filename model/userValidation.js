@@ -58,6 +58,12 @@ const signUserIn = async (user) => {
   activateJournals();
 };
 
+export const signUserOut = () => {
+  localStorage.removeItem("currentUser");
+  currentUser = null;
+  window.location.reload();
+};
+
 export const checkForStoredUserAndAutomaticallySignIn = async () => {
   const storedUser = localStorage.getItem("currentUser");
   if (!storedUser) return;

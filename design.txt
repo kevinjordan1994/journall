@@ -6,9 +6,6 @@ views - responsible for rendering each piece of the application (including error
 helpers - responsible for checking input validation among other things.
 
 Currently working on:
-Stay signed in on reload
-Sign out button on journals
-Navbar
 Tooltips for icons
 
 features to add:

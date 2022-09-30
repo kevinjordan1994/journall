@@ -8,6 +8,7 @@ import {
   addNewUser,
   checkForStoredUserAndAutomaticallySignIn,
   checkForValidUser,
+  signUserOut,
 } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
 import {
@@ -35,6 +36,7 @@ const signUpButton = document.querySelector(".sign-up__btn");
 const goToSignUpButton = document.querySelector(".sign-up__go-to");
 const goToSignInButton = document.querySelector(".sign-in__go-to");
 const toggleSignUpMenusButtons = [goToSignInButton, goToSignUpButton];
+const signOutIcon = document.querySelector(".nav__sign-out");
 
 const toggleSignUpMenus = () => {
   document.querySelector(".sign-in").classList.toggle("hidden");
@@ -60,9 +62,24 @@ toggleSignUpMenusButtons.forEach((button) => {
   });
 });
 
+signOutIcon.addEventListener("click", () => {
+  renderModal(signOutModal);
+  const yesBtn = document.querySelector(".button__confirm__log-out");
+  const noBtn = document.querySelector(".button__deny__log-out");
+  yesBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    signUserOut();
+  });
+  noBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    clearModal();
+  });
+});
+
 const tryToAutomaticallySignIn = async () => {
   renderModal();
   await checkForStoredUserAndAutomaticallySignIn();
+  clearModal();
 };
 
 tryToAutomaticallySignIn();
@@ -169,6 +186,17 @@ const firstTimeModal = modal.createModal(
     },
   ]
 );
+
+const signOutModal = modal.createModal("Log Out?", "Are you sure?", null, [
+  {
+    text: "Yes",
+    class: "button__confirm__log-out",
+  },
+  {
+    text: "No",
+    class: "button__deny__log-out",
+  },
+]);
 //#endregion
 
 //#region Helpers

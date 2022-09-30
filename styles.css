@@ -254,13 +254,17 @@ body {
 
 .nav__icons-list {
   list-style: none;
+  display: flex;
+  gap: 1rem;
 }
 
-.nav__back-arrow {
+.nav__back-arrow,
+.nav__sign-out {
   width: 2rem;
 }
 
-.nav__back-arrow:hover {
+.nav__back-arrow:hover,
+.nav__sign-out:hover {
   cursor: pointer;
 }
 
