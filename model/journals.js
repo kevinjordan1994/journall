@@ -7,8 +7,7 @@ export let targetJournal = null;
 
 export function addNewJournal(journalTitle) {
   if (journalTitle.trim().length < 1) {
-    console.log("Please Enter A Valid Name");
-    return;
+    throw new Error("JournAll must have a title!");
   }
   const journalId = generateId();
   sendJournalToDatabase(journalTitle, journalId);

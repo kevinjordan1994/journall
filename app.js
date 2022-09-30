@@ -182,7 +182,11 @@ const activateAddJournalModal = () => {
   const journalTitleInput = document.querySelector(".modal__title-input");
   addJournalButton.addEventListener("click", (event) => {
     event.preventDefault();
-    addNewJournal(journalTitleInput.value);
+    try {
+      addNewJournal(journalTitleInput.value);
+    } catch (error) {
+      handleError(error.message);
+    }
     renderJournals(localJournals);
     activateJournalDivs();
     activateJournalButton();

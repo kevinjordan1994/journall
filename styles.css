@@ -46,6 +46,14 @@ body {
   font-family: "Satisfy", cursive;
 }
 
+.app__page {
+  height: 100vh;
+}
+
+.app__container {
+  height: 92%;
+}
+
 /* MODALS ======================================================*/
 
 .modal {
@@ -238,6 +246,7 @@ body {
   color: white;
   padding: 1rem;
   width: 100%;
+  height: 8%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -258,7 +267,7 @@ body {
 /* JOURNALS =====================================================*/
 
 .journals__main {
-  height: 100vh;
+  height: 100%;
   padding: 2% 0;
   background: linear-gradient(#fff, var(--secondary-color));
 }

@@ -6,7 +6,8 @@ views - responsible for rendering each piece of the application (including error
 helpers - responsible for checking input validation among other things.
 
 Currently working on:
-Refactor
+Add account
+Tutorial modal after adding first journal
 Sign out button on journals
 Navbar
 Tooltips for icons
