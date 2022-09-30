@@ -41,7 +41,12 @@ export async function replaceData(path = "journals.json", data = undefined) {
 }
 
 export async function findUser(userName) {
-  const user = await fetchData(`users/${userName}.json`);
-  if (!user) return null;
-  return user;
+  const usersArray = [];
+  const users = await fetchData(`users.json`);
+  for (const user in users) {
+    usersArray.push(users[user]);
+  }
+  const targetUser = usersArray.find((user) => user.userName === userName);
+  if (!targetUser) return null;
+  return targetUser;
 }

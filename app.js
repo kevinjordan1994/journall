@@ -4,7 +4,7 @@ import { renderModal } from "./view/renderModal.js";
 import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
 import renderEntryPage from "./view/renderEntryPage.js";
 import { clearModal } from "./view/renderModal.js";
-import { checkForValidUser } from "./model/userValidation.js";
+import { addNewUser, checkForValidUser } from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
 import {
   addNewJournal,
@@ -24,12 +24,36 @@ import toggleNav from "./view/toggleNav.js";
 //#region Sign in
 const userNameInput = document.querySelector(".sign-in__user-name");
 const passwordInput = document.querySelector(".sign-in__password");
+const newUserNameInput = document.querySelector(".sign-up__user-name");
+const newPasswordInput = document.querySelector(".sign-up__password");
 const signInButton = document.querySelector(".sign-in__button");
+const signUpButton = document.querySelector(".sign-up__btn");
+const goToSignUpButton = document.querySelector(".sign-up__go-to");
+const goToSignInButton = document.querySelector(".sign-in__go-to");
+const toggleSignUpMenusButtons = [goToSignInButton, goToSignUpButton];
+
+const toggleSignUpMenus = () => {
+  document.querySelector(".sign-in").classList.toggle("hidden");
+  document.querySelector(".sign-up").classList.toggle("hidden");
+};
 
 signInButton.addEventListener(`click`, (event) => {
   event.preventDefault();
   checkForValidUser(userNameInput.value, passwordInput.value);
   renderModal();
+});
+
+signUpButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  addNewUser(newUserNameInput.value, newPasswordInput.value);
+  renderModal();
+});
+
+toggleSignUpMenusButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    toggleSignUpMenus();
+  });
 });
 //#endregion
 

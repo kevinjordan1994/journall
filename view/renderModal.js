@@ -44,7 +44,7 @@ function generateInputs(inputs) {
     if (input.textarea) {
       inputsHTML += `<textarea class="modal__textarea ${input.class}" type="${input.type}" placeholder="${input.placeholder}"></textarea>`;
     } else {
-      inputsHTML += `<input class="modal__input ${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
+      inputsHTML += `<input maxlength="20" class="modal__input ${input.class}" type="${input.type}" placeholder="${input.placeholder}"/>`;
     }
   });
   return inputsHTML;

@@ -48,7 +48,7 @@
         </ul>
       </nav>
       <section class="app__container">
-        <div class="sign-in__main">
+        <div class="sign-in__main sign-in">
           <div class="sign-in__img">
             <img
               src="images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg"
@@ -77,7 +77,42 @@
               </div>
               <div class="sign-in__buttons-div">
                 <button class="button sign-in__button">Sign In</button>
-                <button class="button sign-in__button">New Account</button>
+                <button class="button sign-up__go-to">New Account</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="new-account" class="sign-in__main sign-up hidden">
+          <div class="sign-in__img">
+            <img
+              src="images/mike-lewis-headsmart-media-waAAaeC9hns-unsplash.jpg"
+              alt="Waterfalls"
+            />
+          </div>
+          <div class="sign-in__card">
+            <div class="sign-in__titles">
+              <h1 class="sign-in__title fancy">Welcome!</h1>
+              <p class="sign-in__sub-title">
+                Your password must be at least 7 characters and should contain a
+                capital letter and a number.
+              </p>
+            </div>
+            <form class="sign-in__form">
+              <div class="sign-in__input-div">
+                <input
+                  class="sign-in__input sign-up__user-name"
+                  placeholder="Enter a Unique User Name"
+                  type="text"
+                />
+                <input
+                  class="sign-in__input sign-up__password"
+                  type="password"
+                  placeholder="Enter a Password"
+                />
+              </div>
+              <div class="sign-in__buttons-div">
+                <button class="button sign-up__btn">Create Account</button>
+                <button class="button sign-in__go-to">Back to Sign In</button>
               </div>
             </form>
           </div>
