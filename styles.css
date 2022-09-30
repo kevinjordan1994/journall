@@ -312,6 +312,14 @@ body {
   cursor: pointer;
 }
 
+.journals__journal-info {
+  width: 50%;
+}
+
+.journals__title {
+  word-wrap: break-word;
+}
+
 .journals__none-message {
   color: var(--primary-color);
   text-align: center;
@@ -372,6 +380,10 @@ body {
 .entries__header {
   display: flex;
   justify-content: space-between;
+}
+
+.entries__text-content {
+  word-wrap: break-word;
 }
 
 .entry__form {

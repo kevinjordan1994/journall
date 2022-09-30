@@ -146,6 +146,18 @@ const warningModal = modal.createModal(
     },
   ]
 );
+
+const firstTimeModal = modal.createModal(
+  "Nice Start!",
+  "You've added a JournAll!<br><br>To add an entry, <strong>click on the title</strong> of your JournAll to go to the entries page.<br><br>Click the corresponding button next to your JournAll in order to <strong>delete</strong> it or <strong>edit</strong> the title.",
+  null,
+  [
+    {
+      text: "Okay",
+      class: "button__confirm__first-time",
+    },
+  ]
+);
 //#endregion
 
 //#region Helpers
@@ -163,6 +175,17 @@ const checkForBlankInputs = (...inputs) => {
 
 const filterJournals = (id) => {
   return localJournals.filter((journal) => journal.id !== id);
+};
+
+const renderTutorialModal = () => {
+  renderModal(firstTimeModal);
+  localStorage.setItem("tutorialSeen", "true");
+  document
+    .querySelector(".button__confirm__first-time")
+    .addEventListener("click", (event) => {
+      event.preventDefault();
+      clearModal();
+    });
 };
 
 //#endregion
@@ -215,6 +238,9 @@ const activateAddJournalModal = () => {
     activateJournalDivs();
     activateJournalButton();
     clearModal();
+    if (!localStorage.getItem("tutorialSeen")) {
+      renderTutorialModal();
+    }
   });
 };
 

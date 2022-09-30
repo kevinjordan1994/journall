@@ -21,7 +21,7 @@ function generateEntriessHTML(entries = []) {
           <button class="button entries__edit-btn">Edit</button>
           </div>
             </div>
-          <p>${entry.content}</p>
+          <p class="entries__text-content">${entry.content}</p>
         </div>`;
         })
         .join(" ")}

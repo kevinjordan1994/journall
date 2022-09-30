@@ -7,7 +7,7 @@ const generateAddEntryHTML = (titleValue, contentValue) => {
     <form class="entry__form">
     <div class="entry__inputs>
       <div class="entry__title-input">
-      <input class="entry__input" ${
+      <input maxlength="15" class="entry__input" ${
         titleValue ? `value="${titleValue}"` : `placeholder="Entry Title"`
       }></input>
       </div>
