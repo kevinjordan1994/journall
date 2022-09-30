@@ -50,7 +50,16 @@ const checkForValidPassword = (password) => {
 
 const signUserIn = async (user) => {
   currentUser = user;
+  if (!localStorage.getItem("currentUser")) {
+    localStorage.setItem("currentUser", JSON.stringify(user));
+  }
   const allJournals = await fetchData(`journals.json`);
   filterLocalJournals(allJournals);
   activateJournals();
+};
+
+export const checkForStoredUserAndAutomaticallySignIn = async () => {
+  const storedUser = localStorage.getItem("currentUser");
+  if (!storedUser) return;
+  await signUserIn(JSON.parse(storedUser));
 };

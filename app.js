@@ -4,7 +4,11 @@ import { renderModal } from "./view/renderModal.js";
 import renderJournals, { deleteJournalHTML } from "./view/renderJournals.js";
 import renderEntryPage from "./view/renderEntryPage.js";
 import { clearModal } from "./view/renderModal.js";
-import { addNewUser, checkForValidUser } from "./model/userValidation.js";
+import {
+  addNewUser,
+  checkForStoredUserAndAutomaticallySignIn,
+  checkForValidUser,
+} from "./model/userValidation.js";
 import { modal } from "./model/modal.js";
 import {
   addNewJournal,
@@ -55,6 +59,13 @@ toggleSignUpMenusButtons.forEach((button) => {
     toggleSignUpMenus();
   });
 });
+
+const tryToAutomaticallySignIn = async () => {
+  renderModal();
+  await checkForStoredUserAndAutomaticallySignIn();
+};
+
+tryToAutomaticallySignIn();
 //#endregion
 
 //Init Modals===============================================================
